@@ -1,26 +1,40 @@
-package com.ccharry.xpensetracker.model;
+package com.ccharry.xpensetracker.entity;
 
 import java.util.List;
 import java.util.Objects;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name = "expenses")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 public class Expense {
 
-    private @Id @GeneratedValue Long id;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id;
     private String name; // internet
     private String type; // mandatory
     private String frequency; // monthly
     private double minValue; // 45.00
     private double maxValue; // 60.00
 
-    @ManyToMany(mappedBy = "expenses")
+    @ManyToMany(targetEntity = Manager.class,  mappedBy = "expenses", cascade = CascadeType.ALL)
     private List<Manager> managers;
 
-    @ManyToMany(mappedBy = "expenses")
+    @ManyToMany(targetEntity = City.class, mappedBy = "expenses", cascade = CascadeType.ALL)
     private List<City> cities;
 
     public Expense() {
@@ -37,6 +51,17 @@ public class Expense {
         this.cities = cities;
     }
 
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public Long getId() {
+        return this.id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }

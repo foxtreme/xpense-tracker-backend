@@ -1,14 +1,16 @@
 package com.ccharry.xpensetracker.controller;
 
 import java.util.List;
-import com.ccharry.xpensetracker.errors.ManagerNotFoundException;
-import com.ccharry.xpensetracker.model.Manager;
+
+import com.ccharry.xpensetracker.entity.Manager;
 import com.ccharry.xpensetracker.repository.ManagerRepository;
+import com.ccharry.xpensetracker.service.ManagerService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,44 +18,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ManagerController {
     
-    private final ManagerRepository repository;
+    private ManagerService managerService;
+    private ManagerRepository managerRepository;
 
-    public ManagerController(ManagerRepository repository) {
-        this.repository = repository;
+    public ManagerController(ManagerService managerService, ManagerRepository managerRepository) {
+        this.managerService = managerService;
+        this.managerRepository = managerRepository;
     }
 
-    // aggregate root
-    // tag::get-aggregate-root[]
-    @GetMapping("/managers")
-    List<Manager> all() {
-        return repository.findAll();
-    }
-    //end::get-aggregate-root[]
-
-    @PostMapping("/managers")
-    Manager newManager(@RequestBody Manager newManager) {
-        return repository.save(newManager);
+    @PostMapping("/manager/create")
+    public ResponseEntity<Object> createManager(@RequestBody Manager manager) {
+        return managerService.createManager(manager);
     }
 
-    // Single item
-
-    @GetMapping("/managers/{id}")
-    Manager one(@PathVariable Long id) {
-        return repository.findById(id)
-        .orElseThrow(() -> new ManagerNotFoundException(id));
+    @GetMapping("/manager/details/{id}")
+    public Manager getManager(@PathVariable Long id) {
+        if(managerRepository.findById(id).isPresent())
+            return managerRepository.findById(id).get();
+        else return null;
     }
 
-    @PutMapping("/managers/{id}")
-    Manager replaceManager(@RequestBody Manager newManager, @PathVariable Long id) {
-        Manager manager = repository.findById(id).orElseThrow(() -> new ManagerNotFoundException(id));
-        manager.setName(newManager.getName());
-        manager.setExpenses(newManager.getExpenses());
-        final Manager updatedManager = repository.save(manager);
-        return updatedManager;
+    @GetMapping("/manager/all")
+    public List<Manager> all() {
+        return managerRepository.findAll();
     }
 
-    @DeleteMapping("/managers/{id}")
-    void deleteManager(@PathVariable Long id) {
-        repository.deleteById(id);
+    @PutMapping("/manager/update/{id}")
+    public ResponseEntity<Object> updateManager(@PathVariable Long id, @RequestBody Manager manager) {
+        return managerService.updateManager(manager, id);
+    }
+
+    @DeleteMapping("/managers/delete/{id}")
+    public ResponseEntity<Object> deleteManager(@PathVariable Long id) {
+        return managerService.deleteManager(id);
     }
 }

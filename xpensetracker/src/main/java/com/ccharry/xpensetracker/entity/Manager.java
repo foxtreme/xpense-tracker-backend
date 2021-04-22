@@ -1,4 +1,4 @@
-package com.ccharry.xpensetracker.model;
+package com.ccharry.xpensetracker.entity;
 
 import java.util.List;
 import java.util.Objects;
@@ -7,20 +7,29 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name = "managers")
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 public class Manager {
-    private @Id @GeneratedValue Long id;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Long id;
 
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "expense_manager", joinColumns = @JoinColumn(name = "expense_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "manager_id", referencedColumnName = "id"))
+    @ManyToMany(targetEntity = Expense.class, cascade = CascadeType.ALL)
     private List<Expense> expenses;
 
     public Manager() {
@@ -31,6 +40,20 @@ public class Manager {
         this.expenses = expenses;
     }
 
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
