@@ -27,11 +27,21 @@ public class CityController {
         this.cityRepository = cityRepository;
     }
 
+    
+    /** 
+     * @param city
+     * @return ResponseEntity<Object>
+     */
     @PostMapping("/city/create")
     public ResponseEntity<Object> createCity(@RequestBody City city){
         return cityService.createCity(city);
     }
 
+    
+    /** 
+     * @param id
+     * @return City
+     */
     @GetMapping("/city/details/{id}")
     public City getCity(@PathVariable Long id) {
         if(cityRepository.findById(id).isPresent())
@@ -39,16 +49,31 @@ public class CityController {
         else return null;
     }
 
+    
+    /** 
+     * @return List<City>
+     */
     @GetMapping("/city/all")
     List<City> getCities(){
         return cityRepository.findAll();
     }
 
+    
+    /** 
+     * @param id
+     * @param city
+     * @return ResponseEntity<Object>
+     */
     @PutMapping("/city/update/{id}")
     public ResponseEntity<Object> updateCity(@PathVariable Long id, @RequestBody City city) {
         return cityService.updateCity(city, id);
     }
 
+    
+    /** 
+     * @param id
+     * @return ResponseEntity<Object>
+     */
     @DeleteMapping("/city/delete/{id}")
     public ResponseEntity<Object> deleteCity(@PathVariable Long id){
         return cityService.deleteCity(id);
