@@ -15,9 +15,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-/**
- * Represents the City Entity
- */
 @Entity
 @Table(name = "cities")
 @JsonIdentityInfo(
@@ -138,6 +135,11 @@ public class City {
         return expenses;
     }
 
+    
+    /** 
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -152,11 +154,19 @@ public class City {
                 && Objects.equals(this.expenses, city.expenses);
     }
 
+    
+    /** 
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.name, this.description, this.country, this.expenses);
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "City{Id: " + this.id + ", Name: " + this.name + ", Description: " + this.description + ", Country: "

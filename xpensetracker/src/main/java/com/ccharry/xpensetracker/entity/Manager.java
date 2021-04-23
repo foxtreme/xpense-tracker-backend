@@ -54,22 +54,43 @@ public class Manager {
         return id;
     }
     
+    
+    /** 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName() {
         return this.name;
     }
 
+    
+    /** 
+     * @param expenses
+     */
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
     }
 
+    
+    /** 
+     * @return List<Expense>
+     */
     public List<Expense> getExpenses() {
         return expenses;
     }
 
+    
+    /** 
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -83,11 +104,19 @@ public class Manager {
                 && Objects.equals(this.expenses, manager.expenses);
     }
 
+    
+    /** 
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.name, this.expenses);
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Manager{ Id:" + this.id + ", name: " + this.name + ", expenses: " + this.expenses + "}";

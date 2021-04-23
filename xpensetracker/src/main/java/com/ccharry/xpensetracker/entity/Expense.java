@@ -37,9 +37,22 @@ public class Expense {
     @ManyToMany(targetEntity = City.class, mappedBy = "expenses", cascade = CascadeType.ALL)
     private List<City> cities;
 
+    /**
+     * Unparameterized Constructor
+     */
     public Expense() {
     }
 
+    /**
+     * Constructor
+     * @param name Name of the expense
+     * @param type Type of the expense
+     * @param frequency Frequency of payment
+     * @param minValue Minimum value
+     * @param maxValue Maximum value
+     * @param managers List of managers
+     * @param cities List of cities
+     */
     public Expense(String name, String type, String frequency, double minValue, double maxValue, List<Manager> managers,
             List<City> cities) {
         this.name = name;
@@ -52,72 +65,138 @@ public class Expense {
     }
 
     /**
+     * 
      * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;
     }
     
+    
+    /** 
+     * @return Long
+     */
     public Long getId() {
         return this.id;
     }
+
     
+    /** 
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName() {
         return this.name;
     }
 
+    
+    /** 
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getType() {
         return this.type;
     }
 
+    
+    /** 
+     * @param frequency
+     */
     public void setFrequency(String frequency) {
         this.frequency = frequency;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getFrequency() {
         return this.frequency;
     }
 
+    
+    /** 
+     * @param minValue
+     */
     public void setMinValue(double minValue) {
         this.minValue = minValue;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getMinValue() {
         return this.minValue;
     }
 
+    
+    /** 
+     * @param maxValue
+     */
     public void setMaxValue(double maxValue) {
         this.maxValue = maxValue;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getMaxValue() {
         return this.maxValue;
     }
 
+    
+    /** 
+     * @param managers
+     */
     public void setManagers(List<Manager> managers) {
         this.managers = managers;
     }
 
+    
+    /** 
+     * @return List<Manager>
+     */
     public List<Manager> getManagers() {
         return this.managers;
     }
 
+    
+    /** 
+     * @param cities
+     */
     public void setCities(List<City> cities) {
         this.cities = cities;
     }
 
+    
+    /** 
+     * @return List<City>
+     */
     public List<City> getCities() {
         return cities;
     }
 
+    
+    /** 
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -133,12 +212,20 @@ public class Expense {
                 && Objects.equals(this.cities, expense.cities) && Objects.equals(this.managers, expense.managers);
     }
 
+    
+    /** 
+     * @return int
+     */
     @Override
     public int hashCode() {
         return Objects.hash(this.id, this.name, this.type, this.frequency, this.minValue, this.maxValue, this.cities,
                 this, managers);
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Expense{ Id:" + this.id + ", Name: " + this.name + ", Type: " + this.type + ", Frequency:"

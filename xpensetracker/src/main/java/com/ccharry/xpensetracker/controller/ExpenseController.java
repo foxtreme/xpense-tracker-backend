@@ -25,16 +25,31 @@ public class ExpenseController {
         this.expenseRepository = expenseRepository;
     }
 
+    
+    /** 
+     * @param expense
+     * @return ResponseEntity<Object>
+     */
     @PostMapping("/expense/create")
     public ResponseEntity<Object> createExpense(@RequestBody Expense expense){
         return expenseService.addExpense(expense);
     }
 
+    
+    /** 
+     * @param id
+     * @return ResponseEntity<Object>
+     */
     @DeleteMapping("/expense/delete/{id}")
     public ResponseEntity<Object> deleteExpense(@PathVariable Long id) {
         return expenseService.deleteExpense(id);
     }
 
+    
+    /** 
+     * @param id
+     * @return Expense
+     */
     @GetMapping("/expense/details/{id}")
     public Expense getExpense(@PathVariable Long id) {
         if (expenseRepository.findById(id).isPresent())
@@ -42,11 +57,21 @@ public class ExpenseController {
         else return null;
     }
 
+    
+    /** 
+     * @return List<Expense>
+     */
     @GetMapping("/expense/all")
     public List<Expense> getExpenses(){
         return expenseRepository.findAll();
     }    
 
+    
+    /** 
+     * @param id
+     * @param expense
+     * @return ResponseEntity<Object>
+     */
     @PutMapping("/expense/update/{id}")
     public ResponseEntity<Object> updateExpense(@PathVariable Long id, @RequestBody Expense expense) {
         return expenseService.updateExpense(id, expense);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,11 +27,21 @@ public class ManagerController {
         this.managerRepository = managerRepository;
     }
 
+    
+    /** 
+     * @param manager
+     * @return ResponseEntity<Object>
+     */
     @PostMapping("/manager/create")
     public ResponseEntity<Object> createManager(@RequestBody Manager manager) {
         return managerService.createManager(manager);
     }
 
+    
+    /** 
+     * @param id
+     * @return Manager
+     */
     @GetMapping("/manager/details/{id}")
     public Manager getManager(@PathVariable Long id) {
         if(managerRepository.findById(id).isPresent())
@@ -38,16 +49,52 @@ public class ManagerController {
         else return null;
     }
 
-    @GetMapping("/manager/all")
-    public List<Manager> all() {
-        return managerRepository.findAll();
+    /** 
+     * @param name
+     * @return Manager
+     */
+    @GetMapping("/manager/details/name")
+    public Manager getManagerByName(@RequestParam(name= "name") String name) {
+        if(managerRepository.findByName(name).isPresent())
+            return managerRepository.findByName(name).get();
+        else return null;
     }
 
+    
+    /** 
+     * @return List<Manager>
+     */
+    @GetMapping("/manager/all")
+    public List<Manager> all() {
+        return managerRepository.findAllByOrderByNameAsc();
+        
+    }
+
+    /**
+     * Returns all managers ordered by how many expenses they have 
+     * @return
+     */
+    @GetMapping("/manager/all/expenses")
+    public List<Object> allByExpenses() {
+        return managerRepository.findAllByExpenses();
+    }
+
+    
+    /** 
+     * @param id
+     * @param manager
+     * @return ResponseEntity<Object>
+     */
     @PutMapping("/manager/update/{id}")
     public ResponseEntity<Object> updateManager(@PathVariable Long id, @RequestBody Manager manager) {
         return managerService.updateManager(manager, id);
     }
 
+    
+    /** 
+     * @param id
+     * @return ResponseEntity<Object>
+     */
     @DeleteMapping("/managers/delete/{id}")
     public ResponseEntity<Object> deleteManager(@PathVariable Long id) {
         return managerService.deleteManager(id);
