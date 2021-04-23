@@ -29,6 +29,7 @@ public class Manager {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = true)
     @ManyToMany(targetEntity = Expense.class, cascade = CascadeType.ALL)
     private List<Expense> expenses;
 
