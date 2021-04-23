@@ -79,6 +79,13 @@ public class ManagerController {
         return managerRepository.findAllByExpenses();
     }
 
+    /** 
+     * @return List<City>
+     */
+    @GetMapping("/managers/all/city")
+    List<Manager> getCityManagers(@RequestParam String city){
+        return managerRepository.findAllCitiesManagers(city);
+    }
     
     /** 
      * @param id

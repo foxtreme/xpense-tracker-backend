@@ -60,6 +60,10 @@ public class ExpenseService {
                     return ResponseEntity.unprocessableEntity().body("Manager creation failed");
             } else return ResponseEntity.unprocessableEntity().body("Manager with the same name is already present"); 
         }
+
+        if (newExpense.getCities().isEmpty() || newExpense.getManagers().isEmpty()){
+            expenseRepository.save(newExpense);
+        }
         
         return ResponseEntity.ok().body("Expense successfully created");
     }
