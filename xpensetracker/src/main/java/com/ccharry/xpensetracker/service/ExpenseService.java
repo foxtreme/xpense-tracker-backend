@@ -42,26 +42,30 @@ public class ExpenseService {
 
         List<Expense> expenseList = new ArrayList<>();
         expenseList.add(newExpense);
-        for (int i=0; i< expense.getCities().size(); i++) {
-            if(!cityRepository.findByName(expense.getCities().get(i).getName()).isPresent()) {
-                City newCity = expense.getCities().get(i);
-                newCity.setExpenses(expenseList);
-                City savedCity = cityRepository.save(newCity);
-                if(! cityRepository.findById(savedCity.getId()).isPresent())
-                    return ResponseEntity.unprocessableEntity().body("City creation failed");
-            } else return ResponseEntity.unprocessableEntity().body("City with the same name is already present"); 
+        if (expense.getCities() != null){
+            for (int i=0; i< expense.getCities().size(); i++) {
+                if(!cityRepository.findByName(expense.getCities().get(i).getName()).isPresent()) {
+                    City newCity = expense.getCities().get(i);
+                    newCity.setExpenses(expenseList);
+                    City savedCity = cityRepository.save(newCity);
+                    if(! cityRepository.findById(savedCity.getId()).isPresent())
+                        return ResponseEntity.unprocessableEntity().body("City creation failed");
+                } else return ResponseEntity.unprocessableEntity().body("City with the same name is already present"); 
+            }
         }
-        for (int i=0; i< expense.getManagers().size(); i++) {
-            if(!cityRepository.findByName(expense.getManagers().get(i).getName()).isPresent()) {
-                Manager newManager = expense.getManagers().get(i);
-                newManager.setExpenses(expenseList);
-                Manager savedManager = managerRepository.save(newManager);
-                if(! managerRepository.findById(savedManager.getId()).isPresent())
-                    return ResponseEntity.unprocessableEntity().body("Manager creation failed");
-            } else return ResponseEntity.unprocessableEntity().body("Manager with the same name is already present"); 
+        if (expense.getManagers() != null) {
+            for (int i=0; i< expense.getManagers().size(); i++) {
+                if(!cityRepository.findByName(expense.getManagers().get(i).getName()).isPresent()) {
+                    Manager newManager = expense.getManagers().get(i);
+                    newManager.setExpenses(expenseList);
+                    Manager savedManager = managerRepository.save(newManager);
+                    if(! managerRepository.findById(savedManager.getId()).isPresent())
+                        return ResponseEntity.unprocessableEntity().body("Manager creation failed");
+                } else return ResponseEntity.unprocessableEntity().body("Manager with the same name is already present"); 
+            }
         }
 
-        if (newExpense.getCities().isEmpty() || newExpense.getManagers().isEmpty()){
+        if (newExpense.getCities() == null && newExpense.getManagers() == null){
             expenseRepository.save(newExpense);
         }
         

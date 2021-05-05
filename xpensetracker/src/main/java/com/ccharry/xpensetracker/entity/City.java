@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -26,8 +28,17 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
+
+    @NotNull(message = "name is required")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "name must be a string")
     private String name;
+
+    @NotNull(message = "country is required")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "country must be a string")
     private String country;
+    
+    @NotNull(message = "description is required")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "description must be a string")
     @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 

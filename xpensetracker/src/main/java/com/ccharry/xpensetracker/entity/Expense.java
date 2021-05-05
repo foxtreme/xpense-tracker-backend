@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -25,15 +29,32 @@ public class Expense {
     @Id 
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
-    private String name; // internet
-    private String type; // mandatory
-    private String frequency; // monthly
-    private double minValue; // 45.00
-    private double maxValue; // 60.00
 
+    @NotNull(message = "name is required")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "name must be a string")
+    private String name; // internet
+    
+    @NotNull(message = "type is required")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "type must be a string")
+    private String type; // mandatory
+
+    @NotNull(message = "frequency is required")
+    @Pattern(regexp = "^[a-zA-Z ]+$", message = "frequency must be a string")
+    private String frequency; // monthly
+
+    @NotNull(message = "minValue is required")
+    @Positive(message = "minValue must be positive")
+    private Long minValue; // 45
+
+    @NotNull(message = "maxValue is required")
+    @Positive(message = "maxValue must be positive")
+    private Long maxValue; // 60
+    
+    @Column(nullable = true)
     @ManyToMany(targetEntity = Manager.class,  mappedBy = "expenses", cascade = CascadeType.ALL)
     private List<Manager> managers;
 
+    @Column(nullable = true)
     @ManyToMany(targetEntity = City.class, mappedBy = "expenses", cascade = CascadeType.ALL)
     private List<City> cities;
 
@@ -53,7 +74,7 @@ public class Expense {
      * @param managers List of managers
      * @param cities List of cities
      */
-    public Expense(String name, String type, String frequency, double minValue, double maxValue, List<Manager> managers,
+    public Expense(String name, String type, String frequency, Long minValue, Long maxValue, List<Manager> managers,
             List<City> cities) {
         this.name = name;
         this.type = type;
@@ -132,7 +153,7 @@ public class Expense {
     /** 
      * @param minValue
      */
-    public void setMinValue(double minValue) {
+    public void setMinValue(Long minValue) {
         this.minValue = minValue;
     }
 
@@ -140,7 +161,7 @@ public class Expense {
     /** 
      * @return double
      */
-    public double getMinValue() {
+    public Long getMinValue() {
         return this.minValue;
     }
 
@@ -148,7 +169,7 @@ public class Expense {
     /** 
      * @param maxValue
      */
-    public void setMaxValue(double maxValue) {
+    public void setMaxValue(Long maxValue) {
         this.maxValue = maxValue;
     }
 
@@ -156,7 +177,7 @@ public class Expense {
     /** 
      * @return double
      */
-    public double getMaxValue() {
+    public Long getMaxValue() {
         return this.maxValue;
     }
 

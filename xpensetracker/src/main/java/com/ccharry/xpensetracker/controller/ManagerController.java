@@ -2,6 +2,8 @@ package com.ccharry.xpensetracker.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.ccharry.xpensetracker.entity.Manager;
 import com.ccharry.xpensetracker.repository.ManagerRepository;
 import com.ccharry.xpensetracker.service.ManagerService;
@@ -11,12 +13,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin
 @RestController
+@RequestMapping("/manager")
 public class ManagerController {
     
     private ManagerService managerService;
@@ -32,8 +38,8 @@ public class ManagerController {
      * @param manager
      * @return ResponseEntity<Object>
      */
-    @PostMapping("/manager/create")
-    public ResponseEntity<Object> createManager(@RequestBody Manager manager) {
+    @PostMapping("/create")
+    public ResponseEntity<Object> createManager(@Valid @RequestBody Manager manager) {
         return managerService.createManager(manager);
     }
 
@@ -42,7 +48,7 @@ public class ManagerController {
      * @param id
      * @return Manager
      */
-    @GetMapping("/manager/details/{id}")
+    @GetMapping("/details/{id}")
     public Manager getManager(@PathVariable Long id) {
         if(managerRepository.findById(id).isPresent())
             return managerRepository.findById(id).get();
@@ -53,7 +59,7 @@ public class ManagerController {
      * @param name
      * @return Manager
      */
-    @GetMapping("/manager/details/name")
+    @GetMapping("/details/name")
     public Manager getManagerByName(@RequestParam(name= "name") String name) {
         if(managerRepository.findByName(name).isPresent())
             return managerRepository.findByName(name).get();
@@ -64,7 +70,7 @@ public class ManagerController {
     /** 
      * @return List<Manager>
      */
-    @GetMapping("/manager/all")
+    @GetMapping("/all")
     public List<Manager> all() {
         return managerRepository.findAllByOrderByNameAsc();
         
@@ -74,7 +80,7 @@ public class ManagerController {
      * Returns all managers ordered by how many expenses they have 
      * @return
      */
-    @GetMapping("/manager/all/expenses")
+    @GetMapping("/all/expenses")
     public List<Object> allByExpenses() {
         return managerRepository.findAllByExpenses();
     }
@@ -82,7 +88,7 @@ public class ManagerController {
     /** 
      * @return List<City>
      */
-    @GetMapping("/managers/all/city")
+    @GetMapping("/all/city")
     List<Manager> getCityManagers(@RequestParam String city){
         return managerRepository.findAllCitiesManagers(city);
     }
@@ -92,8 +98,8 @@ public class ManagerController {
      * @param manager
      * @return ResponseEntity<Object>
      */
-    @PutMapping("/manager/update/{id}")
-    public ResponseEntity<Object> updateManager(@PathVariable Long id, @RequestBody Manager manager) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Object> updateManager(@PathVariable Long id, @Valid @RequestBody Manager manager) {
         return managerService.updateManager(manager, id);
     }
 
@@ -102,7 +108,7 @@ public class ManagerController {
      * @param id
      * @return ResponseEntity<Object>
      */
-    @DeleteMapping("/managers/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteManager(@PathVariable Long id) {
         return managerService.deleteManager(id);
     }

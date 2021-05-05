@@ -1,0 +1,514 @@
+{
+	"info": {
+		"_postman_id": "5b6dfc4b-1553-45ce-9f3e-99e8cfd84640",
+		"name": "XpenseTracketAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Cities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/city/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Expenses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expense/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Managers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET City",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/city/details/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Expense",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expense/details/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Manager",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/details/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST City",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Palmira\",\r\n    \"description\": \"Palmira is a city and municipality in southwestern Colombia in the Valle del Cauca Department, located about 27 kilometres east from Cali, the department's capital and main city in the South of Colombia. Palmira is the third largest city in the Valle del Cauca, behind Cali and Buenaventura\",\r\n    \"country\": \"Colombia\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/city/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Expense",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cell Phone\",\r\n    \"type\": \"Important\",\r\n    \"frequency\": \"Monthly\",\r\n    \"minValue\": 69000,\r\n    \"maxValue\": 69000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/expense/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Manager",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Son Gohan\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/manager/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT City",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/uri-list",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Palmira\",\r\n    \"description\": \"Palmira is a city and municipality in southwestern Colombia in the Valle del Cauca Department, located about 27 kilometres east from Cali, the department's capital and main city in the South of Colombia. Palmira is the third largest city in the Valle del Cauca, behind Cali and Buenaventura\",\r\n    \"country\": \"Colombia\",\r\n    \"expenses\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Cell Phone\",\r\n            \"type\": \"Important\",\r\n            \"frequency\": \"Monthly\",\r\n            \"minValue\": 59000.0,\r\n            \"maxValue\": 69000.0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/city/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Expense",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Water\",\r\n    \"type\": \"Critical\",\r\n    \"frequency\": \"Monthly\",\r\n    \"minValue\": 20000,\r\n    \"maxValue\": 40000,\r\n    \"cities\": [\r\n        {\r\n            \"name\": \"Palmira\",\r\n            \"description\": \"Palmira is a city and municipality in southwestern Colombia in the Valle del Cauca Department, located about 27 kilometres east from Cali, the department's capital and main city in the South of Colombia. Palmira is the third largest city in the Valle del Cauca, behind Cali and Buenaventura\",\r\n            \"country\": \"Colombia\",\r\n            \"expenses\": [\r\n                {\r\n                    \"name\": \"Internet\",\r\n                    \"type\": \"Critical\",\r\n                    \"frequency\": \"Monthly\",\r\n                    \"minValue\": 87000.00,\r\n                    \"maxValue\": 88000.00\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"managers\": [\r\n        {\r\n            \"name\": \"Son Gohan\"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/expense/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Manager",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Christian E. Charry\",\r\n    \"expenses\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Cell Phone\",\r\n            \"type\": \"Important\",\r\n            \"frequency\": \"Monthly\",\r\n            \"minValue\": 59000.0,\r\n            \"maxValue\": 69000.0\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/manager/update/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"update",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE City",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/city/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"city",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Expense",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expense/delete/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"delete",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Manager",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Managers Expenses",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/all/expenses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"all",
+						"expenses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Manager Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manager/details/name/?name=Christian E. Charry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"details",
+						"name",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Christian E. Charry"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET City Managers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/managers/all/city?city=Palmira",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"managers",
+						"all",
+						"city"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Palmira"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Expense Frequency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expense/details/frequency?frequency=Monthly",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"details",
+						"frequency"
+					],
+					"query": [
+						{
+							"key": "frequency",
+							"value": "Monthly"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Expense Type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/expense/details/type?type=Important",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"expense",
+						"details",
+						"type"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Important"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
