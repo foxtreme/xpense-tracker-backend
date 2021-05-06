@@ -29,7 +29,7 @@ public class Manager {
     private Long id;
 
     @NotNull(message = "name is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "name must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "name must be a string")
     private String name;
 
     @Column(nullable = true)

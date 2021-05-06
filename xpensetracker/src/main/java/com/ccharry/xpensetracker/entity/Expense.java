@@ -31,15 +31,15 @@ public class Expense {
     private Long id;
 
     @NotNull(message = "name is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "name must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "name must be a string")
     private String name; // internet
     
     @NotNull(message = "type is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "type must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "type must be a string")
     private String type; // mandatory
 
     @NotNull(message = "frequency is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "frequency must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "frequency must be a string")
     private String frequency; // monthly
 
     @NotNull(message = "minValue is required")

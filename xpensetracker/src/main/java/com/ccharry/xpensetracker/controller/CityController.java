@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @CrossOrigin
 @RestController
@@ -26,6 +28,7 @@ public class CityController {
     
     private CityService cityService;
     private CityRepository cityRepository;
+    private static final Logger LOGGER = LoggerFactory.getLogger(CityController.class);
 
     public CityController(CityService cityService, CityRepository cityRepository){
         this.cityService = cityService;
@@ -39,6 +42,7 @@ public class CityController {
      */
     @PostMapping("/create")
     public ResponseEntity<Object> createCity(@Valid @RequestBody City city){
+        LOGGER.info("POST call to City API creating city with payload: {}", city);
         return cityService.createCity(city);
     }
 
@@ -49,8 +53,10 @@ public class CityController {
      */
     @GetMapping("/details/{id}")
     public City getCity(@PathVariable Long id) {
-        if(cityRepository.findById(id).isPresent())
+        if(cityRepository.findById(id).isPresent()){
+            LOGGER.info("GET call to City API getting City with Id: {}", id);
             return cityRepository.findById(id).get();
+        }
         else return null;
     }
 
@@ -60,6 +66,7 @@ public class CityController {
      */
     @GetMapping("/all")
     List<City> getCities(){
+        LOGGER.info("GET call to City API getting all cities");
         return cityRepository.findAll();
     }
 
@@ -71,6 +78,7 @@ public class CityController {
      */
     @PutMapping("/update/{id}")
     public ResponseEntity<Object> updateCity(@PathVariable Long id, @Valid @RequestBody City city) {
+        LOGGER.info("PUT call to City API updating city with id: %d with payload: %s", id, city);
         return cityService.updateCity(city, id);
     }
 
@@ -81,6 +89,7 @@ public class CityController {
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteCity(@PathVariable Long id){
+        LOGGER.info("DELETE call to City API with Id: {}", id);
         return cityService.deleteCity(id);
     }
 }

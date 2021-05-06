@@ -30,15 +30,15 @@ public class City {
     private Long id;
 
     @NotNull(message = "name is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "name must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "name must be a string")
     private String name;
 
     @NotNull(message = "country is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "country must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "country must be a string")
     private String country;
     
     @NotNull(message = "description is required")
-    @Pattern(regexp = "^[a-zA-Z ]+$", message = "description must be a string")
+    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "description must be a string")
     @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 
