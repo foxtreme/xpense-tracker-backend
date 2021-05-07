@@ -31,7 +31,7 @@ public class CityService {
 
             City savedCity = cityRepository.save(city);
             if (cityRepository.findById(savedCity.getId()).isPresent())
-                return ResponseEntity.ok("City created successfully");
+                return ResponseEntity.ok().body(savedCity);
             else return ResponseEntity.unprocessableEntity().body("Failed creating city as specified");
         }
     }
@@ -48,7 +48,7 @@ public class CityService {
 
             City savedCity = cityRepository.save(newCity);
             if(cityRepository.findById(savedCity.getId()).isPresent())
-                return ResponseEntity.accepted().body("City updated Successfully");
+                return ResponseEntity.accepted().body(savedCity);
             else return ResponseEntity.unprocessableEntity().body("Failed updating the city specified");
         } else return ResponseEntity.unprocessableEntity().body("Cannot find the city specified");
     }
@@ -59,7 +59,7 @@ public class CityService {
             cityRepository.deleteById(id);
             if (cityRepository.findById(id).isPresent())
                 return ResponseEntity.unprocessableEntity().body("Failed to delete the specified city");
-            else return ResponseEntity.ok().body("Successfully delete the specified city");
+            else return ResponseEntity.noContent().build();
         } else return ResponseEntity.badRequest().body("Cannot find the specified city");
     }
 }

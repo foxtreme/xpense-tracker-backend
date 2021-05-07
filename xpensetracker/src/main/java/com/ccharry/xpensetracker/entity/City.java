@@ -38,7 +38,6 @@ public class City {
     private String country;
     
     @NotNull(message = "description is required")
-    @Pattern(regexp = "^[a-zA-Z. ]+$", message = "description must be a string")
     @Column(name = "description", columnDefinition = "LONGTEXT")
     private String description;
 

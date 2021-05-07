@@ -30,7 +30,7 @@ public class ManagerService {
             
             Manager savedManager = managerRepository.save(manager);
             if(managerRepository.findById(savedManager.getId()).isPresent())
-                return ResponseEntity.ok().body("Manager Created Successfully");
+                return ResponseEntity.ok().body(savedManager);
             else return ResponseEntity.unprocessableEntity().body("Failed creating Manager as Specified");
         }
     }
@@ -44,7 +44,7 @@ public class ManagerService {
             newManager.setExpenses(manager.getExpenses());
             Manager savedManager = managerRepository.save(newManager);
             if(managerRepository.findById(savedManager.getId()).isPresent()) 
-                return ResponseEntity.accepted().body("Manager updated Successfully");
+                return ResponseEntity.accepted().body(savedManager);
             else return ResponseEntity.unprocessableEntity().body("Failed updating the specified Manager");
         } else return ResponseEntity.unprocessableEntity().body("Cannot find the specified Manager");
     }
@@ -55,7 +55,7 @@ public class ManagerService {
             managerRepository.deleteById(id);
             if(managerRepository.findById(id).isPresent())
                 return ResponseEntity.unprocessableEntity().body("Failed to delete the specified Manager");
-            else return ResponseEntity.ok().body("Successfully deleted Manager");
+            else return ResponseEntity.noContent().build();
         } else return ResponseEntity.badRequest().body("Cannot find the Manager specified");
     }
 }

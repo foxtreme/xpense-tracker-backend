@@ -69,7 +69,7 @@ public class ExpenseService {
             expenseRepository.save(newExpense);
         }
         
-        return ResponseEntity.ok().body("Expense successfully created");
+        return ResponseEntity.ok().body(newExpense);
     }
 
     /** Delete an Expense */
@@ -78,7 +78,7 @@ public class ExpenseService {
             expenseRepository.deleteById(id);
             if(expenseRepository.findById(id).isPresent())
                 return ResponseEntity.unprocessableEntity().body("Failed to delete the specified record");
-            else return ResponseEntity.ok().body("Successfully deleted specified record");
+            else return ResponseEntity.noContent().build();
         } else 
             return ResponseEntity.unprocessableEntity().body("No records found");
     }
@@ -97,7 +97,7 @@ public class ExpenseService {
             newExpense.setCities(expense.getCities());
             Expense savedExpense = expenseRepository.save(newExpense);
             if(expenseRepository.findById(savedExpense.getId()).isPresent())
-                return ResponseEntity.accepted().body("Expense saved Successfully");
+                return ResponseEntity.accepted().body(savedExpense);
             else return ResponseEntity.badRequest().body("Failed to update Expense");
         } else return ResponseEntity.unprocessableEntity().body("Specified Expense not found");
     }
